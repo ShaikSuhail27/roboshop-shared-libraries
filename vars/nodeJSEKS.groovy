@@ -88,17 +88,17 @@ def call(Map configMap){
                 }
             }
 
-            stage('EKS Deploy') {
-                steps {
-                    script{
-                        sh """
-                            cd helm
-                            sed -i 's/IMAGE_VERSION/$packageVersion/g' values.yaml
-                            helm install ${component} -n roboshop .
-                        """
-                    }
-                }
-            }
+            // stage('EKS Deploy') {
+            //     steps {
+            //         script{
+            //             sh """
+            //                 cd helm
+            //                 sed -i 's/IMAGE_VERSION/$packageVersion/g' values.yaml
+            //                 helm install ${component} -n roboshop .
+            //             """
+            //         }
+            //     }
+            // }
 
             //here I need to configure downstram job. I have to pass package version for deployment
             // This job will wait until downstrem job is over
