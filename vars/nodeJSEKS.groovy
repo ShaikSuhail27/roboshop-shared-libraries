@@ -3,7 +3,7 @@ def call(Map configMap){
     def component = configMap.get("component")
     echo "component is : $component"
     pipeline {
-        agent { node { label 'AGENT-1' } }
+        agent { node { label 'Agent-1' } }
         environment{
             //here if you create any variable you will have global access, since it is environment no need of def
             packageVersion = ''
@@ -53,7 +53,7 @@ def call(Map configMap){
                     nexusArtifactUploader(
                         nexusVersion: 'nexus3',
                         protocol: 'http',
-                        nexusUrl: '172.31.86.20:8081/',
+                        nexusUrl: '172.31.20.212:8081/',
                         groupId: 'com.roboshop',
                         version: "$packageVersion",
                         repository: "${component}",
@@ -72,7 +72,7 @@ def call(Map configMap){
                 steps {
                     script{
                         sh """
-                            docker build -t joindevops/${component}:${packageVersion} .
+                            docker build -t shaiksuhail2767/${component}:${packageVersion} .
                         """
                     }
                 }
@@ -82,7 +82,7 @@ def call(Map configMap){
                 steps {
                     script{
                         sh """
-                            docker push joindevops/${component}:${packageVersion}
+                            docker push shaiksuhail2767/${component}:${packageVersion}
                         """
                     }
                 }
